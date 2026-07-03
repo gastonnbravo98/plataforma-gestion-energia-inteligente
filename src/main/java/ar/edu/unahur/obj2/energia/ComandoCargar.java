@@ -5,6 +5,9 @@ public class ComandoCargar implements OperacionTransferencia {
     private double kwh;
 
     public ComandoCargar(Bateria bateria, double kwh) {
+        if (kwh <= 0) {
+            throw new IllegalArgumentException("La cantidad debe ser mayor a 0");
+        }
         this.bateria = bateria;
         this.kwh = kwh;
     }
@@ -12,5 +15,15 @@ public class ComandoCargar implements OperacionTransferencia {
     @Override
     public void ejecutar() {
         bateria.cargar(kwh);
+    }
+
+    @Override
+    public void deshacer() {
+        
+        try {
+            bateria.consumir(kwh);
+        } catch (LimiteReservaExcedidoException e) {
+            
+        }
     }
 }
