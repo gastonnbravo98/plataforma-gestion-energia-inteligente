@@ -22,22 +22,18 @@ public class Bateria {
         return nivelEnergia;
     }
 
-    public void cargar(double cantidad) {
+   public void cargar(double cantidad) {
         this.nivelEnergia += cantidad;
-        System.out.println("Batería " + id + " cargada. Nivel actual: " + this.nivelEnergia + " kWh");
-        notificarMonitores();
+        notificarMonitores(cantidad); 
     }
 
-   public void consumir(double cantidad) throws LimiteReservaExcedidoException {
+    public void consumir(double cantidad) throws LimiteReservaExcedidoException {
         double limiteReserva = -5000.0;
-        
         if ((this.nivelEnergia - cantidad) < limiteReserva) {
             throw new LimiteReservaExcedidoException("Supera el límite de reserva de -5000 kWh");
         }
-        
         this.nivelEnergia -= cantidad;
-        System.out.println("Batería " + id + " consumida. Nivel actual: " + this.nivelEnergia + " kWh");
-        notificarMonitores();
+        notificarMonitores(-cantidad); 
     }
 
     public void agregarMonitor(MonitorPeriferico monitor) {
@@ -48,9 +44,9 @@ public class Bateria {
         monitores.remove(monitor);
     }
 
-    private void notificarMonitores() {
+    private void notificarMonitores(double variacion) {
         for (MonitorPeriferico monitor : monitores) {
-            monitor.actualizar(this);
+            monitor.actualizar(this, variacion);
         }
     }
 }

@@ -39,8 +39,7 @@ public class Rutina implements OperacionTransferencia {
         for (int i = operaciones.size() - 1; i >= 0; i--) {
             operaciones.get(i).deshacer();
         }
-    }
-    
+    } 
   
     public int getCantidadOperaciones() {
         return operaciones.size();
