@@ -23,29 +23,26 @@ public class ControladorOperacionesTest {
         ControladorOperaciones controlador = new ControladorOperaciones();
         OperacionTransferencia carga = new ComandoCargar(bateria, 20.0);
         
-        controlador.ejecutarInmediata(carga);
+        controlador.ejecutarOperacion(carga);
         
         assertEquals(120.0, bateria.getNivelEnergia(), 0.01);
     }
 
     @Test
-    public void testControladorEjecutaRutinaYVaciaLaLista() throws LimiteReservaExcedidoException {
+    public void testControladorEjecutaRutinaComoComposite() throws LimiteReservaExcedidoException {
         Bateria bateria = new Bateria("Bat-01", 100.0);
         ControladorOperaciones controlador = new ControladorOperaciones();
         
-        controlador.registrarEnRutina(new ComandoCargar(bateria, 50.0));
-        controlador.registrarEnRutina(new ComandoConsumir(bateria, 20.0));
+        Rutina rutina = new Rutina();
+        rutina.agregarOperacion(new ComandoCargar(bateria, 50.0));
+        rutina.agregarOperacion(new ComandoConsumir(bateria, 20.0));
         
-       
-        assertEquals(2, controlador.getCantidadPendientes());
+        
+        assertEquals(2, rutina.getCantidadOperaciones());
 
-        
-        controlador.ejecutarRutina();
-        
-        
+      
+        controlador.ejecutarOperacion(rutina);
+      
         assertEquals(130.0, bateria.getNivelEnergia(), 0.01);
-        
-       
-        assertEquals(0, controlador.getCantidadPendientes());
     }
 }
