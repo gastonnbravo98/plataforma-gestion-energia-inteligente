@@ -1,5 +1,5 @@
 # Plataforma de Gestion de Energia Iinteligente
-
+Hola hice lo que me pidio que no hice en el primer parcial ahora hice mas archivos .java y se entiende mejor.Muchas gracias por la ayuda.
 ### **⚡ Sistema de Gestión de Energía Inteligente (SGEI).**
 
 Una red eléctrica inteligente necesita implementar un sistema que permita registrar distintas operaciones de transferencia de energía sobre baterías de almacenamiento (nodos) y ejecutarlas en distintos momentos. Además, el sistema deberá evolucionar para que otros componentes periféricos de monitoreo puedan reaccionar automáticamente cuando ocurran variaciones en la carga de una batería.
