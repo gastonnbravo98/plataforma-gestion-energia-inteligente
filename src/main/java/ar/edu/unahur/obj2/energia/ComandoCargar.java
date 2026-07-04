@@ -1,8 +1,9 @@
 package ar.edu.unahur.obj2.energia;
 
 public class ComandoCargar implements OperacionTransferencia {
-    private Bateria bateria;
-    private double kwh;
+    
+    private final Bateria bateria;
+    private final double kwh;
 
     public ComandoCargar(Bateria bateria, double kwh) {
         if (kwh <= 0) {
@@ -19,11 +20,10 @@ public class ComandoCargar implements OperacionTransferencia {
 
     @Override
     public void deshacer() {
-        
         try {
             bateria.consumir(kwh);
         } catch (LimiteReservaExcedidoException e) {
-            
+           
         }
     }
 }

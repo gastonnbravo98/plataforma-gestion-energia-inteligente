@@ -3,10 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Bateria {
-    private String id;
+   
+    private static final double LIMITE_RESERVA_KWH = -5000.0;
+
+    private final String id;
     private double nivelEnergia;
-    
-    private List<MonitorPeriferico> monitores;
+    private final List<MonitorPeriferico> monitores;
 
     public Bateria(String id, double nivelInicial) {
         this.id = id;
@@ -22,18 +24,18 @@ public class Bateria {
         return nivelEnergia;
     }
 
-   public void cargar(double cantidad) {
+    public void cargar(double cantidad) {
         this.nivelEnergia += cantidad;
-        notificarMonitores(cantidad); 
+        notificarMonitores(cantidad);
     }
 
     public void consumir(double cantidad) throws LimiteReservaExcedidoException {
-        double limiteReserva = -5000.0;
-        if ((this.nivelEnergia - cantidad) < limiteReserva) {
-            throw new LimiteReservaExcedidoException("Supera el límite de reserva de -5000 kWh");
+        
+        if ((this.nivelEnergia - cantidad) < LIMITE_RESERVA_KWH) {
+            throw new LimiteReservaExcedidoException("Supera el límite de reserva de " + LIMITE_RESERVA_KWH + " kWh");
         }
         this.nivelEnergia -= cantidad;
-        notificarMonitores(-cantidad); 
+        notificarMonitores(-cantidad);
     }
 
     public void agregarMonitor(MonitorPeriferico monitor) {

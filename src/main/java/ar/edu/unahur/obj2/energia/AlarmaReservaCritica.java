@@ -14,7 +14,6 @@ public class AlarmaReservaCritica implements MonitorPeriferico {
         }
     }
 
-    // Para el Test
     public boolean isAlarmaActivada() {
         return alarmaActivada;
     }
